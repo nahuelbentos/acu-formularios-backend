@@ -46,7 +46,7 @@ namespace Business.DesperfectoMovil
         if (result > 0)
           return Unit.Value;
 
-        throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrió un error al crear la el Formulario Desperfecto Movil" });
+        throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrió un error al crear el Formulario Desperfecto Movil" });
       }
     }
   }

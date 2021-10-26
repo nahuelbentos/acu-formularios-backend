@@ -30,11 +30,30 @@ namespace WebAPI
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+      // Configuración de CORS
+      services.AddCors(o => o.AddPolicy("corsApp", builder =>
+      {
+        builder
+          .AllowAnyOrigin()
+          .AllowAnyMethod()
+          .AllowAnyHeader();
+      }));
 
       services.AddDbContext<FormularioContext>(opt =>
       {
         opt.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection"));
       });
+      //  Configuracion IIS
+      services.Configure<IISServerOptions>(options =>
+          {
+            options.AutomaticAuthentication = false;
+          });
+      services.Configure<IISOptions>(options =>
+          {
+            options.ForwardClientCertificate = false;
+          });
+      services.AddOptions();
+
       services.AddControllers();
       // Middleware
 
@@ -44,6 +63,9 @@ namespace WebAPI
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
+      // Indico que la app use la policy "corsApp"definida en ConfigureServices.      
+      app.UseCors("corsApp");
+
       if (env.IsDevelopment())
       {
         app.UseDeveloperExceptionPage();
@@ -55,7 +77,6 @@ namespace WebAPI
         builder.AllowAnyMethod();
         builder.AllowAnyHeader();
       });
-
     //   app.UseHttpsRedirection();
 
       app.UseRouting();
@@ -71,3 +92,5 @@ namespace WebAPI
     }
   }
 }
+
+

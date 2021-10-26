@@ -4,7 +4,7 @@ namespace Models
 {
     public class FormularioDiarioMovil
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public short MovCod { get; set; }
         public string EscInsId { get; set; }
         public int MovilKilometraje { get; set; }

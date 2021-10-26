@@ -5,7 +5,7 @@ namespace Models
     public class FormularioEvaluacionAlumno
     {
         
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string EscInsId { get; set; }
         public string AlumnoNombreApellido { get; set; }
         public short NumeroClase { get; set; }

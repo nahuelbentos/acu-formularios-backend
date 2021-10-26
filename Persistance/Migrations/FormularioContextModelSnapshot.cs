@@ -21,9 +21,9 @@ namespace Persistance.Migrations
 
             modelBuilder.Entity("Models.FormularioDesperfectoMovil", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Desperfecto")
@@ -48,9 +48,9 @@ namespace Persistance.Migrations
 
             modelBuilder.Entity("Models.FormularioDiarioMovil", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("Combustible")
@@ -132,9 +132,9 @@ namespace Persistance.Migrations
 
             modelBuilder.Entity("Models.FormularioEvaluacionAlumno", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AceptaIndicacionesInstructor")
@@ -175,6 +175,9 @@ namespace Persistance.Migrations
 
                     b.Property<int>("EvaluaEnfrentaAdecuadamenteDificultades")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("FechaCreacion")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("FrenaConSuficienteAnticipacion")
                         .HasColumnType("int");
@@ -264,9 +267,9 @@ namespace Persistance.Migrations
 
             modelBuilder.Entity("Models.FormularioResultadoExamenPractico", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AlumnoNombreApellido")
@@ -281,13 +284,16 @@ namespace Persistance.Migrations
                     b.Property<string>("EscInsId")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("FechaCreacion")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("InstructorAlumnoId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MotivoReprobacionCalle")
+                    b.Property<int?>("MotivoReprobacionCalle")
                         .HasColumnType("int");
 
-                    b.Property<int>("MotivoReprobacionPista")
+                    b.Property<int?>("MotivoReprobacionPista")
                         .HasColumnType("int");
 
                     b.Property<int>("Resultado")

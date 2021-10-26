@@ -84,5 +84,6 @@ namespace Business.DiarioMovil
         throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrió un error al crear la el Formulario Diario Movil" });
       }
     }
+ 
   }
 }
