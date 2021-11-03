@@ -8,27 +8,29 @@ using Models;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class DesperfectoMovilController : MiControllerBase
-    {
-            
+  [Route("api/[controller]")]
+  [ApiController]
+  public class DesperfectoMovilController : MiControllerBase
+  {
+
     [HttpPost]
-    public async Task<ActionResult<Unit>> AltaDesperfectoMovil(Nuevo.Ejecuta data) => await this.Mediator.Send(data);
+    public async Task<ActionResult<Unit>> AltaDesperfectoMovil(Nuevo.Ejecuta data) 
+        => await this.Mediator.Send(data);
 
     [HttpGet]
-    public async Task<ActionResult<List<FormularioDesperfectoMovil>>> GetDesperfectoMovil() {
-        Console.WriteLine("Entro en Consulta");
-        return await this.Mediator.Send(new Consulta.Ejecuta());
-    } //=> await this.Mediator.Send(new Consulta.Ejecuta());
-    
+    public async Task<ActionResult<List<FormularioDesperfectoMovil>>> GetDesperfectoMovil() 
+        => await this.Mediator.Send(new Consulta.Ejecuta());
+
     [HttpGet("{id}")]
-    public async Task<ActionResult<FormularioDesperfectoMovil>> GetById(int id) => await this.Mediator.Send(new ConsultaById.Ejecuta { Id = id });
+    public async Task<ActionResult<FormularioDesperfectoMovil>> GetById(int id)
+        => await this.Mediator.Send(new ConsultaById.Ejecuta { Id = id });
 
     [HttpGet("movil/{id}")]
-    public async Task<ActionResult<List<FormularioDesperfectoMovil>>> GetByMovil(int id) => await this.Mediator.Send(new ConsultaByMovil.Ejecuta { MovilId = id });
-    
+    public async Task<ActionResult<List<FormularioDesperfectoMovil>>> GetByMovil(int id)
+        => await this.Mediator.Send(new ConsultaByMovil.Ejecuta { MovilId = id });
+
     [HttpGet("instructor/{id}")]
-    public async Task<ActionResult<List<FormularioDesperfectoMovil>>> GetByInstructor(string id) => await this.Mediator.Send(new ConsultaByInstructor.Ejecuta { InstructorId = id });
-    }
+    public async Task<ActionResult<List<FormularioDesperfectoMovil>>> GetByInstructor(string id)
+        => await this.Mediator.Send(new ConsultaByInstructor.Ejecuta { InstructorId = id });
+  }
 }

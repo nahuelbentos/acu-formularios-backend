@@ -22,11 +22,8 @@ namespace Business.DesperfectoMovil
       {
         this.context = context;
       }
-      public async Task<List<FormularioDesperfectoMovil>> Handle(Ejecuta request, CancellationToken cancellationToken) {
-        Console.WriteLine("Entro en Consulta");
-        var lista = await this.context.FormularioDesperfectoMovil.ToListAsync();
-        return lista;
-      } 
+      public async Task<List<FormularioDesperfectoMovil>> Handle(Ejecuta request, CancellationToken cancellationToken) 
+        =>  await this.context.FormularioDesperfectoMovil.ToListAsync();
       
     }
 

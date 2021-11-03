@@ -13,10 +13,10 @@ namespace Persistance
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) { }
 
-    public DbSet<FormularioDesperfectoMovil> FormularioDesperfectoMovil {get; set;}
-    public DbSet<FormularioDiarioMovil> FormularioDiarioMovil {get; set;}
-    public DbSet<FormularioEvaluacionAlumno> FormularioEvaluacionAlumno {get; set;}
-    public DbSet<FormularioResultadoExamenPractico> FormularioResultadoExamenPractico {get; set;}
+    public DbSet<FormularioDesperfectoMovil> FormularioDesperfectoMovil { get; set; }
+    public DbSet<FormularioDiarioMovil> FormularioDiarioMovil { get; set; }
+    public DbSet<FormularioEvaluacionAlumno> FormularioEvaluacionAlumno { get; set; }
+    public DbSet<FormularioResultadoExamenPractico> FormularioResultadoExamenPractico { get; set; }
 
   }
 }
