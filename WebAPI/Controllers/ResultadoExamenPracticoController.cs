@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Business.DTOs;
 using Business.ResultadoExamenPractico;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +18,7 @@ namespace WebAPI.Controllers
     public async Task<ActionResult<Unit>> AltaResultadoExamenPractico(Nuevo.Ejecuta data) => await this.Mediator.Send(data);
 
     [HttpGet]
-    public async Task<ActionResult<List<FormularioResultadoExamenPractico>>> GetResultadoExamenPractico()
+    public async Task<ActionResult<List<FormularioResultadoExamenPracticoDTO>>> GetResultadoExamenPractico()
         => await this.Mediator.Send(new Consulta.Execute());
 
     [HttpGet("instructor/{id}")]

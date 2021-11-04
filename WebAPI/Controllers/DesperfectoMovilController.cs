@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Business.DesperfectoMovil;
+using Business.DTOs;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Models;
@@ -18,7 +19,7 @@ namespace WebAPI.Controllers
         => await this.Mediator.Send(data);
 
     [HttpGet]
-    public async Task<ActionResult<List<FormularioDesperfectoMovil>>> GetDesperfectoMovil() 
+    public async Task<ActionResult<List<FormularioDesperfectoMovilDTO>>> GetDesperfectoMovil() 
         => await this.Mediator.Send(new Consulta.Ejecuta());
 
     [HttpGet("{id}")]

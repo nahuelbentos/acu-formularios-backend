@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Business.DTOs;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Models;
@@ -10,9 +12,9 @@ namespace Business.EvaluacionAlumno
 {
   public class Consulta
   {
-    public class Execute : IRequest<List<FormularioEvaluacionAlumno>> { }
+    public class Execute : IRequest<List<FormularioEvaluacionAlumnoDTO>> { }
 
-    public class Handler : IRequestHandler<Execute, List<FormularioEvaluacionAlumno>>
+    public class Handler : IRequestHandler<Execute, List<FormularioEvaluacionAlumnoDTO>>
     {
       private readonly FormularioContext context;
 
@@ -21,8 +23,16 @@ namespace Business.EvaluacionAlumno
         this.context = context;
       }
 
-      public async Task<List<FormularioEvaluacionAlumno>> Handle(Execute request, CancellationToken cancellationToken)
-        => await this.context.FormularioEvaluacionAlumno.ToListAsync();
+      public async Task<List<FormularioEvaluacionAlumnoDTO>> Handle(Execute request, CancellationToken cancellationToken)
+        => await this.context.FormularioEvaluacionAlumno.Select(f => new FormularioEvaluacionAlumnoDTO
+        {
+          Id = f.Id,
+          Instructor = f.EscInsId,
+          Alumno = f.AlumnoNombreApellido,
+          Clase = f.NumeroClase,
+          Fecha = f.FechaCreacion,
+          Observaciones = f.Observaciones
+        }).ToListAsync();
 
     }
   }
