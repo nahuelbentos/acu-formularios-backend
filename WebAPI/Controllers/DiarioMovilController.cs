@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Business.DiarioMovil;
+using Business.DTOs;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Models;
@@ -15,7 +16,7 @@ namespace WebAPI.Controllers
     public async Task<ActionResult<Unit>> AltaDiarioMovil(Nuevo.Ejecuta data) => await this.Mediator.Send(data);
 
     [HttpGet]
-    public async Task<ActionResult<List<FormularioDiarioMovil>>> GetDiarioMovil() => await this.Mediator.Send(new Consulta.Ejecuta());
+    public async Task<ActionResult<List<FormularioDiarioMovilDTO>>> GetDiarioMovil() => await this.Mediator.Send(new Consulta.Ejecuta());
     
     [HttpGet("{id}")]
     public async Task<ActionResult<FormularioDiarioMovil>> GetById(int id) => await this.Mediator.Send(new ConsultaById.Ejecuta { Id = id });
@@ -25,6 +26,10 @@ namespace WebAPI.Controllers
     
     [HttpGet("instructor/{id}")]
     public async Task<ActionResult<List<FormularioDiarioMovil>>> GetByInstructor(string id) => await this.Mediator.Send(new ConsultaByInstructor.Ejecuta { InstructorId = id });
+
+
+    [HttpPost("excel")]
+    public async Task<ActionResult<object>> GetDiarioMovilExcel( long[] ids) => await this.Mediator.Send(new ExportExcel.Execute{ Ids = ids });
 
   }
 }

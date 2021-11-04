@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Business.DTOs;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Models;
@@ -9,14 +10,14 @@ using Persistance;
 
 namespace Business.EvaluacionAlumno
 {
-    public class ConsultaByInstructor
+  public class ConsultaByInstructor
+  {
+    public class Execute : IRequest<List<FormularioEvaluacionAlumnoDTO>>
     {
-        public class Execute : IRequest<List<FormularioEvaluacionAlumno>>
-        {
-            public string InstructorId { get; set; }
-        }
+      public string InstructorId { get; set; }
+    }
 
-    public class Handler : IRequestHandler<Execute, List<FormularioEvaluacionAlumno>>
+    public class Handler : IRequestHandler<Execute, List<FormularioEvaluacionAlumnoDTO>>
     {
       private readonly FormularioContext context;
 
@@ -25,8 +26,19 @@ namespace Business.EvaluacionAlumno
         this.context = context;
       }
 
-      public async Task<List<FormularioEvaluacionAlumno>> Handle(Execute request, CancellationToken cancellationToken)
-        => await this.context.FormularioEvaluacionAlumno.Where(f => f.EscInsId == request.InstructorId).ToListAsync();
+      public async Task<List<FormularioEvaluacionAlumnoDTO>> Handle(Execute request, CancellationToken cancellationToken)
+        => await this.context.FormularioEvaluacionAlumno
+          .Where(f => f.EscInsId == request.InstructorId)
+          .Select(f => new FormularioEvaluacionAlumnoDTO
+          {
+            Id = f.Id,
+            Alumno = f.AlumnoNombreApellido,
+            Clase = f.NumeroClase,
+            Fecha = f.FechaCreacion,
+            Instructor = f.EscInsId,
+            Observaciones = f.Observaciones
+          })
+          .ToListAsync();
     }
 
 

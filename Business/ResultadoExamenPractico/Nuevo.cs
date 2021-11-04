@@ -11,6 +11,7 @@ namespace Business.ResultadoExamenPractico
 {
   public class Nuevo
   {
+
     public class Ejecuta : IRequest
     {
       public string EscInsId { get; set; }
