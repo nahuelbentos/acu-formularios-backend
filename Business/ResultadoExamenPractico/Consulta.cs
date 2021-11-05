@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -30,7 +31,7 @@ namespace Business.ResultadoExamenPractico
             Alumno = f.AlumnoNombreApellido,
             Fecha = f.FechaCreacion,
             Instructor = f.EscInsId,
-            Resultado = f.Resultado
+            Resultado = Enum.GetName( typeof(ResultadoExamen), f.Resultado)
           })
           .ToListAsync();
     }

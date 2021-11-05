@@ -11,5 +11,6 @@ namespace Business.DTOs
     public int Kilometraje { get; set; }
     public string Desperfecto { get; set; }
     public DateTime Fecha { get; set; }
+    public string FechaCreacion { get; set; }
     }
 }
