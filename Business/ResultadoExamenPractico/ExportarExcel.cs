@@ -12,12 +12,9 @@ using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml;
 using Persistance;
 
-
-
-
-namespace Business.DiarioMovil
+namespace Business.ResultadoExamenPractico
 {
-  public class ExportExcel
+  public class ExportarExcel
   {
     public class Execute : IRequest<object>
     {
@@ -36,18 +33,18 @@ namespace Business.DiarioMovil
 
       public async Task<object> Handle(Execute request, CancellationToken cancellationToken)
       {
-        List<FormularioDiarioMovilDTO> formularios = null;
+        List<FormularioResultadoExamenPracticoDTO> formularios = null;
         if (request.Ids != null && request.Ids.Length > 0)
         {
-          formularios = await this.context.FormularioDiarioMovil
+          formularios = await this.context.FormularioResultadoExamenPractico
           .Where(f => request.Ids.Contains(f.Id))
-          .Select(f => Helpers.toFormularioDiarioMovilDTO(f))
+          .Select(f => Helpers.toFormularioResultadoExamenPracticoDTO(f))
           .ToListAsync();
         }
         else
         {
-          formularios = await this.context.FormularioDiarioMovil
-          .Select(f => Helpers.toFormularioDiarioMovilDTO(f))
+          formularios = await this.context.FormularioResultadoExamenPractico
+          .Select(f => Helpers.toFormularioResultadoExamenPracticoDTO(f))
           .ToListAsync();
         }
         DataTable table = Helpers.ToDataTable(formularios);
@@ -61,7 +58,7 @@ namespace Business.DiarioMovil
 
         FileInfo filePath = new FileInfo(path);
         var excelPack = new ExcelPackage(path);
-        var workSheets = excelPack.Workbook.Worksheets.Add("Formulario-Diario-Movil");
+        var workSheets = excelPack.Workbook.Worksheets.Add("Formulario-Resultado-Examen-Practico");
         workSheets.Cells.LoadFromDataTable(table, true, OfficeOpenXml.Table.TableStyles.Light8);
         excelPack.Save();
 

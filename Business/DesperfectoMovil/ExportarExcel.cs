@@ -14,11 +14,11 @@ using Persistance;
 
 
 
-
-namespace Business.DiarioMovil
+namespace Business.DesperfectoMovil
 {
-  public class ExportExcel
+  public class ExportarExcel
   {
+
     public class Execute : IRequest<object>
     {
       public long[] Ids { get; set; }
@@ -36,19 +36,19 @@ namespace Business.DiarioMovil
 
       public async Task<object> Handle(Execute request, CancellationToken cancellationToken)
       {
-        List<FormularioDiarioMovilDTO> formularios = null;
+        List<FormularioDesperfectoMovilDTO> formularios = null;
         if (request.Ids != null && request.Ids.Length > 0)
         {
-          formularios = await this.context.FormularioDiarioMovil
-          .Where(f => request.Ids.Contains(f.Id))
-          .Select(f => Helpers.toFormularioDiarioMovilDTO(f))
-          .ToListAsync();
+          formularios = await this.context.FormularioDesperfectoMovil
+            .Where(f => request.Ids.Contains(f.Id))
+            .Select(f => Helpers.toFormularioDesperfectoMovilDTO(f))
+            .ToListAsync();
         }
         else
         {
-          formularios = await this.context.FormularioDiarioMovil
-          .Select(f => Helpers.toFormularioDiarioMovilDTO(f))
-          .ToListAsync();
+          formularios = await this.context.FormularioDesperfectoMovil
+            .Select(f => Helpers.toFormularioDesperfectoMovilDTO(f))
+            .ToListAsync();
         }
         DataTable table = Helpers.ToDataTable(formularios);
 
@@ -61,7 +61,7 @@ namespace Business.DiarioMovil
 
         FileInfo filePath = new FileInfo(path);
         var excelPack = new ExcelPackage(path);
-        var workSheets = excelPack.Workbook.Worksheets.Add("Formulario-Diario-Movil");
+        var workSheets = excelPack.Workbook.Worksheets.Add("Formulario-Desperfecto-Movil");
         workSheets.Cells.LoadFromDataTable(table, true, OfficeOpenXml.Table.TableStyles.Light8);
         excelPack.Save();
 
@@ -72,6 +72,7 @@ namespace Business.DiarioMovil
 
 
     }
+
 
   }
 }

@@ -15,11 +15,11 @@ namespace WebAPI.Controllers
   {
 
     [HttpPost]
-    public async Task<ActionResult<Unit>> AltaDesperfectoMovil(Nuevo.Ejecuta data) 
+    public async Task<ActionResult<Unit>> AltaDesperfectoMovil(Nuevo.Ejecuta data)
         => await this.Mediator.Send(data);
 
     [HttpGet]
-    public async Task<ActionResult<List<FormularioDesperfectoMovilDTO>>> GetDesperfectoMovil() 
+    public async Task<ActionResult<List<FormularioDesperfectoMovilDTO>>> GetDesperfectoMovil()
         => await this.Mediator.Send(new Consulta.Ejecuta());
 
     [HttpGet("{id}")]
@@ -33,5 +33,10 @@ namespace WebAPI.Controllers
     [HttpGet("instructor/{id}")]
     public async Task<ActionResult<List<FormularioDesperfectoMovil>>> GetByInstructor(string id)
         => await this.Mediator.Send(new ConsultaByInstructor.Ejecuta { InstructorId = id });
+
+
+    [HttpPost("excel")]
+    public async Task<ActionResult<object>> GetDesperfectoMovilExcel(long[] ids)
+        => await this.Mediator.Send(new ExportarExcel.Execute { Ids = ids });
   }
 }

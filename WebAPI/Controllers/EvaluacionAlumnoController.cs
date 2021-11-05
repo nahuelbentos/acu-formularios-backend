@@ -25,5 +25,10 @@ namespace WebAPI.Controllers
     public async Task<ActionResult<List<FormularioEvaluacionAlumnoDTO>>> GetEvaluacionAlumnoByInstructor(string id)
         => await this.Mediator.Send(new ConsultaByInstructor.Execute { InstructorId = id });
 
+
+    [HttpPost("excel")]
+    public async Task<ActionResult<object>> GetEvaluacionAlumnoExcel(long[] ids)
+        => await this.Mediator.Send(new ExportarExcel.Execute { Ids = ids });
+
   }
 }
