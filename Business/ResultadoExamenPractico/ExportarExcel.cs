@@ -54,7 +54,8 @@ namespace Business.ResultadoExamenPractico
         {
           File.Delete(path);
         }
-        File.Create(path);
+        var myFile = File.Create(path);
+        myFile.Close();
 
         FileInfo filePath = new FileInfo(path);
         var excelPack = new ExcelPackage(path);

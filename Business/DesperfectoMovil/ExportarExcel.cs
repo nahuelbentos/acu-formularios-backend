@@ -57,7 +57,8 @@ namespace Business.DesperfectoMovil
         {
           File.Delete(path);
         }
-        File.Create(path);
+        var myFile = File.Create(path);
+        myFile.Close();
 
         FileInfo filePath = new FileInfo(path);
         var excelPack = new ExcelPackage(path);
@@ -67,6 +68,7 @@ namespace Business.DesperfectoMovil
 
         Byte[] bytes = File.ReadAllBytes(path);
         String file = Convert.ToBase64String(bytes);
+
         return new { file };
       }
 
