@@ -11,9 +11,9 @@ using Persistance;
 
 namespace Business.ResultadoExamenPractico
 {
-    public class Consulta
-    {
-        public class Execute : IRequest<List<FormularioResultadoExamenPracticoDTO>>{}
+  public class Consulta
+  {
+    public class Execute : IRequest<List<FormularioResultadoExamenPracticoDTO>> { }
 
     public class Handler : IRequestHandler<Execute, List<FormularioResultadoExamenPracticoDTO>>
     {
@@ -25,15 +25,20 @@ namespace Business.ResultadoExamenPractico
       }
 
       public async Task<List<FormularioResultadoExamenPracticoDTO>> Handle(Execute request, CancellationToken cancellationToken)
-        => await this.context.FormularioResultadoExamenPractico
-          .Select( f => new FormularioResultadoExamenPracticoDTO {
-            Id = f.Id,
-            Alumno = f.AlumnoNombreApellido,
-            Fecha = f.FechaCreacion,
-            Instructor = f.EscInsId,
-            Resultado = Enum.GetName( typeof(ResultadoExamen), f.Resultado)
-          })
-          .ToListAsync();
+      {
+
+        return await this.context.FormularioResultadoExamenPractico
+                .Select(f => new FormularioResultadoExamenPracticoDTO
+                {
+                  Id = f.Id,
+                  Alumno = f.AlumnoNombreApellido,
+                  Fecha = f.FechaCreacion,
+                  Instructor = f.EscInsId,
+                  Resultado = f.getResultado(f.Resultado)
+                })
+                .ToListAsync();
+      }
+
     }
   }
 }

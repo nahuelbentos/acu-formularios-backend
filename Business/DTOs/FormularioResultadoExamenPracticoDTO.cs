@@ -17,5 +17,6 @@ namespace Business.DTOs
         public string MotivoReprobacionPista { get; set; }
         public string MotivoReprobacionCalle { get; set; }
         public string DetalleMotivoPerdida { get; set; }
+
     }
 }

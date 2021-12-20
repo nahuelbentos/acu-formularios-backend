@@ -124,13 +124,13 @@ namespace Business.Utils
       Id = f.Id,
       Instructor = f.EscInsId,
       Alumno = f.AlumnoNombreApellido,
-      Resultado = Enum.GetName(typeof(ResultadoExamen), f.Resultado),
+      Resultado =  f.getResultado(f.Resultado),
       Fecha = f.FechaCreacion,
       FechaCreacion = f.FechaCreacion.ToShortDateString(),
       EsAlumnoOtroInstructor = f.EsAlumnoOtroInstructor ? "Si" : "No",
       InstructorDelAlumno = f.InstructorAlumnoId,
-      MotivoReprobacionPista = Enum.GetName(typeof(MotivoReprobacionPista), f.MotivoReprobacionPista),
-      MotivoReprobacionCalle = Enum.GetName(typeof(MotivoReprobacionCalle), f.MotivoReprobacionCalle),
+      MotivoReprobacionPista =  f.getMotivoReprobacionPista(f.MotivoReprobacionPista),
+      MotivoReprobacionCalle = f.getMotivoReprobacionCalle(f.MotivoReprobacionCalle),
       DetalleMotivoPerdida = f.DetalleMotivoPerdida,
     };
   }

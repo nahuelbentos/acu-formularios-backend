@@ -1,3 +1,4 @@
+using System.Text;
 using System;
 
 namespace Models
@@ -17,6 +18,9 @@ namespace Models
         public DateTime FechaCreacion { get; set; }
         
         
+        public string getResultado( ResultadoExamen resultado) => Enum.GetName(typeof(ResultadoExamen), resultado);
+        public string getMotivoReprobacionPista( MotivoReprobacionPista? motivo) => motivo == null ? String.Empty : Enum.GetName(typeof(MotivoReprobacionPista), motivo);
+        public string getMotivoReprobacionCalle( MotivoReprobacionCalle? motivo) => motivo == null ? String.Empty : Enum.GetName(typeof(MotivoReprobacionCalle), motivo);
     }
     public enum ResultadoExamen
     {
